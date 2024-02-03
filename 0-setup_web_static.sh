@@ -1,19 +1,14 @@
 #!/usr/bin/env bash
 #script that sets up your web servers for the deployment of web_static
-sudo apt upgrade
-sudo apt install nginx
+sudo apt upgrade -y -q
+sudo apt install nginx -y -q
 mkdir -p /data/
 mkdir -p /data/web_static/
 mkdir -p /data/web_static/releases/
 mkdir -p /data/web_static/shared/
 mkdir -p /data/web_static/releases/test/
 echo "<h1> Ahmed is the best </h1>" > /data/web_static/releases/test/index.html
-if [ -L /data/web_static/current ]
-then
-  ln -sf /data/web_static/releases/test /data/web_static/current
-else
-  ln -s /data/web_static/releases/test /data/web_static/current
-fi
+ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
 printf %s "server {
     listen 80;
@@ -30,7 +25,7 @@ printf %s "server {
         internal;
     }
     location /hbnb_static/{
-	alias /data/web_static/current/;
+        alias /data/web_static/current/;
     }
  }" > /etc/nginx/sites-available/default
  service nginx restart
