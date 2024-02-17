@@ -15,7 +15,7 @@ def display():
 
 @app.route("/hbnb", strict_slashes=False)
 def display_1():
-    """print HBNB """
+    """ print HBNB """
     return "HBNB"
 
 
