@@ -14,7 +14,7 @@ def display():
     return "Hello HBNB!"
 
 @app.route("/hbnb", strict_slashes=False)
-def display_1():
+def show():
     """ print HBNB """
     return "HBNB"
 
